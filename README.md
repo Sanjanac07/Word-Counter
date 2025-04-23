@@ -16,9 +16,5 @@ A simple PHP web application that allows users to count the number of words and 
 - **Frontend:** HTML, CSS  
 - **Backend:** PHP
 
-## 📸 Screenshots
 
-> _Add screenshots here if you'd like (e.g., a preview of the UI)_
-
-## 📂 Project Structure
 
