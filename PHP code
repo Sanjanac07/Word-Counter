@@ -1,0 +1,72 @@
+<?php
+// Initialize variables
+$wordCount = 0;
+$charCount = 0;
+$inputText = "";
+
+// Check if the form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Get the input text
+    $inputText = trim($_POST["text"]);
+
+    // Check if the input is not empty
+    if (!empty($inputText)) {
+        // Count words
+        $wordCount = str_word_count($inputText);
+
+        // Count characters
+        $charCount = strlen($inputText);
+    } else {
+        $error = "Please enter some text!";
+    }
+}
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word and Character Counter</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <div class="container">
+        <h2>📚 Word & Character Counter</h2>
+
+        <!-- Form to enter text -->
+        <form action="index.php" method="POST">
+            <textarea name="text" rows="10" cols="50" placeholder="Enter your text here...">
+                <?php echo htmlspecialchars($inputText); ?></textarea>
+            <br>
+            <button type="submit">Count Words & Characters</button>
+        </form>
+
+        <!-- Display Results -->
+        <?php if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($inputText)) : ?>
+            <div class="result">
+                <p>
+                    <strong>✅ Word Count:</strong> 
+                <?php echo $wordCount; ?></p>
+                <p>
+                    <strong>✅ Character Count:</strong>
+                <?php 
+                echo $charCount; 
+                ?>
+                </p>
+            </div>
+        <?php 
+        elseif (isset($error)) : 
+        ?>
+            <p class="error">
+                <?php 
+                echo $error; 
+                ?></p>
+        <?php 
+        endif; 
+        ?>
+    </div>
+
+</body>
+</html>
